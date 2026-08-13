@@ -1,4 +1,3 @@
-
 # 🏪 KoneMoshapoRetail - Azure Cloud Storage Solution
 
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)
@@ -64,7 +63,16 @@ KoneMoshapoRetail is a cloud-native web application built for **ABC Retail** to 
 
 ## 🚀 Live Demo
 
-🌐 **Web Application:** [https://kone-retail-10365593.azurewebsites.net](https://kone-retail-10365593.azurewebsites.net)
+🌐 **Web Application:** [https://konemoshaporetail20260813090115-hvetdjaxazh9c9g0.southafricanorth-01.azurewebsites.net](https://konemoshaporetail20260813090115-hvetdjaxazh9c9g0.southafricanorth-01.azurewebsites.net)
+
+### Live Application Statistics
+
+| Statistic | Count |
+|-----------|-------|
+| 👤 Total Customers | **5** ✅ |
+| 📦 Total Products | **4** ✅ |
+| 📋 Pending Orders | **4** ✅ |
+| 📝 Log Files | **23** ✅ |
 
 ---
 
@@ -117,6 +125,7 @@ KoneMoshapoRetail/
 - **Cloud Provider:** Microsoft Azure
 
 ### Azure Services
+
 | Service | Purpose |
 |---------|---------|
 | **Azure Table Storage** | Customer profiles, product information |
@@ -215,7 +224,7 @@ https://localhost:44365/
 
 4. **Access your app**:
    ```
-   https://kone-retail-10365593.azurewebsites.net
+   https://konemoshaporetail20260813090115-hvetdjaxazh9c9g0.southafricanorth-01.azurewebsites.net
    ```
 
 ---
@@ -292,7 +301,7 @@ This project is for educational purposes as part of the **IIE Cloud Development 
 ## 📞 Contact
 
 - **GitHub:** [Noshy321](https://github.com/Noshy321)
-- **Email:** boitumelotsholo8@gmail.com
+- **Email:** KONEMOSHAPO@gmail.com
 
 ---
 
@@ -300,7 +309,7 @@ This project is for educational purposes as part of the **IIE Cloud Development 
 
 | Resource | URL |
 |----------|-----|
-| **Web Application** | https://kone-retail-10365593.azurewebsites.net |
+| **Web Application** | https://konemoshaporetail20260813090115-hvetdjaxazh9c9g0.southafricanorth-01.azurewebsites.net |
 | **GitHub Repository** | https://github.com/Noshy321/CloudPROJECT1-KoneMoshapoRetail |
 | **Azure Portal** | https://portal.azure.com |
 
@@ -338,45 +347,3 @@ This project is for educational purposes as part of the **IIE Cloud Development 
 ---
 
 *Last Updated: August 13, 2026*
-```
-
----
-
-## 📥 How to Add the README
-
-### Option 1: Using Command Line
-```bash
-# Navigate to your project
-cd "C:\Users\Student\source\repos\KoneMoshapoRetail"
-
-# Create README.md file
-notepad README.md
-
-# Paste the content above, save, and close
-
-# Add, commit, and push
-git add README.md
-git commit -m "Add professional README.md"
-git push
-```
-
-### Option 2: Using Visual Studio
-```
-1. In Solution Explorer, right-click on the project
-2. Add → New Item → Text File
-3. Name it: README.md
-4. Paste the content above
-5. Save
-6. Git Changes → Commit → Push
-```
-
-### Option 3: Directly on GitHub
-```
-1. Go to: https://github.com/Noshy321/CloudPROJECT1-KoneMoshapoRetail
-2. Click "Add file" → "Create new file"
-3. Name: README.md
-4. Paste the content above
-5. Click "Commit new file"
-```
-
----
