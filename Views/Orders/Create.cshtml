@@ -1,0 +1,167 @@
+﻿@model KoneMoshapoRetail.Models.OrderMessage
+
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>🛒 Create New Order</h1>
+        <p class="subtitle">Process a new customer order</p>
+    </div>
+</div>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="CustomerId" class="form-label">Customer *</label>
+                            <select asp-for="CustomerId" class="form-control" asp-items="@(new SelectList(ViewBag.Customers, "RowKey", "CustomerName"))">
+                                <option value="">-- Select Customer --</option>
+                            </select>
+                            <span asp-validation-for="CustomerId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="PaymentMethod" class="form-label">Payment Method *</label>
+                            <select asp-for="PaymentMethod" class="form-control">
+                                <option value="">-- Select Payment --</option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Debit Card">Debit Card</option>
+                                <option value="PayPal">PayPal</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                            </select>
+                            <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ShippingAddress" class="form-label">Shipping Address *</label>
+                        <input asp-for="ShippingAddress" class="form-control" placeholder="Enter shipping address" />
+                        <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label asp-for="ShippingCity" class="form-label">City</label>
+                            <input asp-for="ShippingCity" class="form-control" placeholder="Enter city" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="ShippingProvince" class="form-label">Province</label>
+                            <input asp-for="ShippingProvince" class="form-control" placeholder="Enter province" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="OrderNotes" class="form-label">Order Notes</label>
+                            <input asp-for="OrderNotes" class="form-control" placeholder="Special instructions" />
+                        </div>
+                    </div>
+
+                    <hr />
+                    <h5>📦 Order Items</h5>
+
+                    <div id="orderItemsContainer">
+                        <div class="order-item-row form-row">
+                            <div class="form-group col-md-5">
+                                <label class="form-label">Product</label>
+                                <select name="Items[0].ProductId" class="form-control product-select" asp-items="@(new SelectList(ViewBag.Products, "RowKey", "ProductName"))">
+                                    <option value="">-- Select Product --</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="form-label">Quantity</label>
+                                <input name="Items[0].Quantity" class="form-control qty-input" type="number" min="1" value="1" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="form-label">Price</label>
+                                <input name="Items[0].Price" class="form-control price-input" type="number" step="0.01" placeholder="0.00" />
+                            </div>
+                            <div class="form-group col-md-1 d-flex align-items-end">
+                                <button type="button" class="btn btn-danger remove-item" style="margin-bottom: 1rem;">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" id="addItemBtn" class="btn btn-info mt-2">
+                        <i class="fas fa-plus"></i> Add Item
+                    </button>
+
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg px-5">
+                            <i class="fas fa-save"></i> Create Order
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary btn-lg px-5">
+                            <i class="fas fa-arrow-left"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        let itemIndex = 1;
+
+        $(document).ready(function() {
+            // Add item row
+            $('#addItemBtn').click(function() {
+                const row = `
+                            <div class="order-item-row form-row">
+                                <div class="form-group col-md-5">
+                                    <label class="form-label">Product</label>
+                                    <select name="Items[${itemIndex}].ProductId" class="form-control product-select" asp-items="@(new SelectList(ViewBag.Products, "RowKey", "ProductName"))">
+                                        <option value="">-- Select Product --</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Quantity</label>
+                                    <input name="Items[${itemIndex}].Quantity" class="form-control qty-input" type="number" min="1" value="1" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="form-label">Price</label>
+                                    <input name="Items[${itemIndex}].Price" class="form-control price-input" type="number" step="0.01" placeholder="0.00" />
+                                </div>
+                                <div class="form-group col-md-1 d-flex align-items-end">
+                                    <button type="button" class="btn btn-danger remove-item" style="margin-bottom: 1rem;">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                $('#orderItemsContainer').append(row);
+                itemIndex++;
+            });
+
+            // Remove item row
+            $(document).on('click', '.remove-item', function() {
+                if ($('.order-item-row').length > 1) {
+                    $(this).closest('.order-item-row').remove();
+                } else {
+                    alert('You must have at least one item in the order.');
+                }
+            });
+        });
+    </script>
+}

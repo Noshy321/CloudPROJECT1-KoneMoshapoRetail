@@ -1,0 +1,79 @@
+﻿@model KoneMoshapoRetail.Models.CustomerProfile
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>👤 Customer Details</h1>
+        <p class="subtitle">View customer information</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width: 30%;">Full Name</th>
+                            <td>@Model.CustomerName</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>@Model.Email</td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td>@Model.Phone</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>@Model.Address</td>
+                        </tr>
+                        <tr>
+                            <th>Customer Type</th>
+                            <td><span class="badge badge-info">@Model.CustomerType</span></td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge badge-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Inactive</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Total Orders</th>
+                            <td>@Model.TotalOrders</td>
+                        </tr>
+                        <tr>
+                            <th>Total Spent</th>
+                            <td>@Model.TotalSpent.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <th>Created Date</th>
+                            <td>@Model.CreatedDate?.ToString("yyyy-MM-dd HH:mm")</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a asp-action="Edit" asp-route-partitionKey="@Model.PartitionKey" asp-route-rowKey="@Model.RowKey" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

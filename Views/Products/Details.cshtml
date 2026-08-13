@@ -1,0 +1,111 @@
+﻿@model KoneMoshapoRetail.Models.ProductInfo
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>📦 Product Details</h1>
+        <p class="subtitle">View product information</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <div class="text-center mb-4">
+                        <img src="@Model.ImageUrl" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;" />
+                    </div>
+                }
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width: 30%;">Product Name</th>
+                            <td>@Model.ProductName</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>@Model.Description</td>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td><span class="badge badge-info">@Model.Category</span></td>
+                        </tr>
+                        <tr>
+                            <th>Brand</th>
+                            <td>@Model.Brand</td>
+                        </tr>
+                        <tr>
+                            <th>SKU</th>
+                            <td>@Model.SKU</td>
+                        </tr>
+                        <tr>
+                            <th>Price</th>
+                            <td><strong>@Model.Price.ToString("C")</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Cost Price</th>
+                            <td>@Model.CostPrice.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <th>Stock Quantity</th>
+                            <td>
+                                @if (Model.StockQuantity <= Model.LowStockThreshold)
+                                {
+                                    <span class="badge badge-danger">Low: @Model.StockQuantity</span>
+                                }
+                                else
+                                {
+                                    <span>@Model.StockQuantity</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Low Stock Alert</th>
+                            <td>@Model.LowStockThreshold</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>
+                                @if (Model.IsAvailable)
+                                {
+                                    <span class="badge badge-success">Available</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Unavailable</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Featured</th>
+                            <td>@(Model.IsFeatured ? "✅ Yes" : "❌ No")</td>
+                        </tr>
+                        <tr>
+                            <th>Created At</th>
+                            <td>@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        </tr>
+                        <tr>
+                            <th>Last Updated</th>
+                            <td>@Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a asp-action="Edit" asp-route-partitionKey="@Model.PartitionKey" asp-route-rowKey="@Model.RowKey" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

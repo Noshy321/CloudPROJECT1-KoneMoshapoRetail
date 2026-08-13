@@ -1,0 +1,501 @@
+﻿@{
+    ViewData["Title"] = "KoneMoshapoRetail - Dashboard";
+}
+
+<style>
+    /* ===== KoneMoshapoRetail Dashboard Styles ===== */
+
+    :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --success-color: #27ae60;
+        --danger-color: #e74c3c;
+        --warning-color: #f39c12;
+        --info-color: #1abc9c;
+        --light-bg: #ecf0f1;
+        --dark-text: #2c3e50;
+        --border-radius: 8px;
+        --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: var(--dark-text);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .display-4 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .lead {
+        font-size: 1.25rem;
+        color: #6c757d;
+    }
+
+    hr {
+        border: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+        margin: 20px 0;
+    }
+
+    /* ===== Stats Cards ===== */
+    .stat-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: var(--box-shadow);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-left: 4px solid var(--secondary-color);
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-card .stat-label {
+            color: #7f8c8d;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+    /* ===== Cards ===== */
+    .card {
+        border: none;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+    .card-header {
+        background: linear-gradient(135deg, var(--primary-color), #34495e);
+        color: white;
+        font-weight: 600;
+        border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+        padding: 1rem 1.5rem;
+        border: none;
+    }
+
+        .card-header .emoji {
+            margin-right: 10px;
+        }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-text {
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    .card-body ul {
+        padding-left: 0;
+    }
+
+        .card-body ul li {
+            padding: 5px 0;
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+    /* ===== Buttons ===== */
+    .btn {
+        border-radius: var(--border-radius);
+        padding: 0.5rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+        color: white;
+    }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+
+    .btn-success {
+        background: linear-gradient(135deg, var(--success-color), #219a52);
+        color: white;
+    }
+
+        .btn-success:hover {
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+        }
+
+    .btn-info {
+        background: linear-gradient(135deg, var(--info-color), #16a085);
+        color: white;
+    }
+
+        .btn-info:hover {
+            box-shadow: 0 4px 12px rgba(26, 188, 156, 0.4);
+        }
+
+    .btn.w-100 {
+        width: 100%;
+    }
+
+    .mt-2 {
+        margin-top: 0.5rem;
+    }
+
+    .mt-4 {
+        margin-top: 1.5rem;
+    }
+
+    .mt-5 {
+        margin-top: 3rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+
+    /* ===== Features Section ===== */
+    .features-card {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        text-align: center;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+        .features-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .features-card h5 {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .features-card p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+    /* ===== Responsive ===== */
+    media (max-width: 768px) {
+        .display-4 {
+            font-size: 1.8rem;
+        }
+
+        .stat-card .stat-number {
+            font-size: 1.5rem;
+        }
+
+        .col-md-3, .col-lg-3 {
+            width: 100%;
+        }
+
+        .row {
+            flex-direction: column;
+        }
+    }
+
+    /* ===== Row & Column Layout ===== */
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+    }
+
+        .row.mb-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .row.mt-5 {
+            margin-top: 3rem;
+        }
+
+    .col-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .col-md-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+        padding: 0 10px;
+    }
+
+    .col-md-4 {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+        padding: 0 10px;
+    }
+
+    .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+        padding: 0 10px;
+    }
+
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding: 0 10px;
+    }
+
+    media (max-width: 768px) {
+        .col-md-3, .col-md-4, .col-lg-3, .col-md-6 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+
+    .h-100 {
+        height: 100%;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .list-unstyled {
+        list-style: none;
+        padding: 0;
+    }
+
+    .mt-5 {
+        margin-top: 3rem;
+    }
+
+    .mt-4 {
+        margin-top: 1.5rem;
+    }
+
+    .mt-2 {
+        margin-top: 0.5rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<div class="container fade-in">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-4">🏪 KoneMoshapoRetail</h1>
+            <p class="lead">Azure Cloud Storage Solution - ABC Retail</p>
+            <hr>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <span class="stat-icon">👤</span>
+                <div class="stat-number">@ViewBag.CustomerCount</div>
+                <div class="stat-label">Total Customers</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <span class="stat-icon">📦</span>
+                <div class="stat-number">@ViewBag.ProductCount</div>
+                <div class="stat-label">Total Products</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <span class="stat-icon">📋</span>
+                <div class="stat-number">@ViewBag.OrderCount</div>
+                <div class="stat-label">Pending Orders</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="stat-card">
+                <span class="stat-icon">📝</span>
+                <div class="stat-number">@ViewBag.LogCount</div>
+                <div class="stat-label">Log Files</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Cards -->
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <span class="emoji">👤</span> Table Storage
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Manage customer profiles and product information using Azure Tables.</p>
+                    <ul class="list-unstyled">
+                        <li>✅ Customer Profiles</li>
+                        <li>✅ Product Information</li>
+                        <li>✅ CRUD Operations</li>
+                    </ul>
+                    <a asp-controller="Customers" asp-action="Index" class="btn btn-primary w-100">
+                        👥 Manage Customers
+                    </a>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-success w-100 mt-2">
+                        📦 Manage Products
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <span class="emoji">🖼️</span> Blob Storage
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Store and manage product images and multimedia content.</p>
+                    <ul class="list-unstyled">
+                        <li>🖼️ Image Upload</li>
+                        <li>📂 File Management</li>
+                        <li>🔗 Public URLs</li>
+                    </ul>
+                    <a asp-controller="Products" asp-action="Create" class="btn btn-primary w-100">
+                        📤 Upload Image
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <span class="emoji">📋</span> Queue Storage
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Process orders and manage inventory using Azure Queues.</p>
+                    <ul class="list-unstyled">
+                        <li>📨 Order Processing</li>
+                        <li>📦 Inventory Updates</li>
+                        <li>🔄 Async Processing</li>
+                    </ul>
+                    <a asp-controller="Orders" asp-action="Create" class="btn btn-primary w-100">
+                        🛒 Create Order
+                    </a>
+                    <a asp-controller="Orders" asp-action="Index" class="btn btn-info w-100 mt-2">
+                        👁️ View Queue
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <span class="emoji">📝</span> File Storage
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Store and manage application log files.</p>
+                    <ul class="list-unstyled">
+                        <li>📝 Log Management</li>
+                        <li>📂 File Storage</li>
+                        <li>🔍 Log Search</li>
+                    </ul>
+                    <a asp-controller="Logs" asp-action="Index" class="btn btn-primary w-100">
+                        📖 View Logs
+                    </a>
+                    <a asp-controller="Logs" asp-action="Create" class="btn btn-success w-100 mt-2">
+                        ➕ Add Log
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="emoji">🚀</span> KoneMoshapoRetail Features
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="features-card">
+                                <h5>📊 Scalability</h5>
+                                <p>Azure services automatically scale to handle increased demand during peak seasons.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="features-card">
+                                <h5>🔒 Reliability</h5>
+                                <p>Built-in redundancy and failover ensure 99.9% availability for your data.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="features-card">
+                                <h5>💰 Cost-Effective</h5>
+                                <p>Pay only for what you use with Azure's consumption-based pricing model.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
